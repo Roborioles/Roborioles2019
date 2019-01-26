@@ -30,6 +30,7 @@ public class Drive extends Command {
     double speed = Robot.m_oi.getStick().getY()*-1.0;
     double rotation = Robot.m_oi.getStick().getX();
     Robot.m_DriveBase.DriveWithJoySticks(speed, rotation);
+    Robot.m_DriveBase.AutoShift(900, 700);
 
   }
 

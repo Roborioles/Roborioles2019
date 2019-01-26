@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.commands.Drive;
@@ -26,11 +28,16 @@ public class DriveBase extends Subsystem {
   private WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(3);
   private WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(4);
   private DifferentialDrive robotDrive = new DifferentialDrive(leftMotor1, rightMotor1);
+  private Solenoid shiftSolenoid=new Solenoid(0,0);
 
 
   public DriveBase(){
     leftMotor2.set(ControlMode.Follower, 1);
     rightMotor2.set(ControlMode.Follower, 3);
+    leftMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+    leftMotor1.setSensorPhase(false);
+    rightMotor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+    rightMotor1.setSensorPhase(false);
 
 
   }
@@ -46,5 +53,25 @@ public class DriveBase extends Subsystem {
 
 
   }
+  public void AutoShift(double upshift,double downshift){
+    double motorVelocityleft=leftMotor1.getSensorCollection().getQuadratureVelocity();
+    double motorVelocityright=rightMotor1.getSensorCollection().getQuadratureVelocity();
+   // shiftSolenoid.set(true);
+    
+    boolean ishigh=shiftSolenoid.get();
+    int rpmleft= (int) ((motorVelocityleft * 10) / 4096 * 60);
+    int rpmright= (int) ((motorVelocityright * 10) / 4096 * 60);
+   // SmartDashboard.putNumber("DB/String 5", rpm);
+    System.out.println("RPM Left: "+rpmleft+"\tRPM Right: "+ rpmright);
+    rpmleft=java.lang.Math.abs(rpmleft);
+    if(ishigh== false && rpmleft >upshift){
+      shiftSolenoid.set(true);
+  
+    }
+    if(ishigh== true && rpmleft <downshift){
+      shiftSolenoid.set(false);
+      
+    }
 
+  }
 }
