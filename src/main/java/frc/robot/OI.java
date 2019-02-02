@@ -8,6 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Setpoint1;
+import frc.robot.commands.Setpoint2;
+import frc.robot.commands.Setpoint3;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -41,11 +46,25 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
- Joystick stick = new Joystick(0);
+  Joystick stick = new Joystick(0);
+  Joystick gamepad = new Joystick(1);
+  Button gamepadButton1 = new JoystickButton(gamepad, 1);
+  Button gamepadButton2 = new JoystickButton(gamepad, 2);
+  Button gamepadButton3 = new JoystickButton(gamepad, 3);
+  public OI() {
+    gamepadButton1.whenPressed(new Setpoint1());
+    gamepadButton2.whenPressed(new Setpoint2());
+    gamepadButton3.whenPressed(new Setpoint3());
+  }
+  public Joystick getStick()
+  {
+    return stick;
+  }
 
-public Joystick getStick(){
-  return stick;
-}
+  public Joystick getGamepad()
+  {
+    return gamepad;
+  }
 
 
 }
