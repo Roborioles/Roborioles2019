@@ -10,6 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Stretch;
+import frc.robot.commands.Launch;
+import frc.robot.commands.RaiseLower;;
 import frc.robot.commands.Setpoint1;
 import frc.robot.commands.Setpoint2;
 import frc.robot.commands.Setpoint3;
@@ -46,16 +49,24 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-  Joystick stick = new Joystick(0);
-  Joystick gamepad = new Joystick(1);
-  Button gamepadButton1 = new JoystickButton(gamepad, 1);
-  Button gamepadButton2 = new JoystickButton(gamepad, 2);
-  Button gamepadButton3 = new JoystickButton(gamepad, 3);
-  public OI() {
-    gamepadButton1.whenPressed(new Setpoint1());
-    gamepadButton2.whenPressed(new Setpoint2());
-    gamepadButton3.whenPressed(new Setpoint3());
-  }
+ Joystick stick = new Joystick(0);
+ Joystick gamePad=new Joystick(1);
+ Button button8=new JoystickButton(stick, 8);
+ Button button9=new JoystickButton(stick, 9);
+ Button button1=new JoystickButton(stick,1);
+ Button gamepadButton1 = new JoystickButton(gamepad, 1);
+ Button gamepadButton2 = new JoystickButton(gamepad, 2);
+ Button gamepadButton3 = new JoystickButton(gamepad, 3);
+
+public OI(){
+  button8.whenPressed(new Stretch());
+  button9.whenPressed(new RaiseLower());
+  button1.whenPressed(new Launch());
+  gamepadButton1.whenPressed(new Setpoint1());
+  gamepadButton2.whenPressed(new Setpoint2());
+  gamepadButton3.whenPressed(new Setpoint3());
+}
+
   public Joystick getStick()
   {
     return stick;
@@ -65,6 +76,5 @@ public class OI {
   {
     return gamepad;
   }
-
 
 }

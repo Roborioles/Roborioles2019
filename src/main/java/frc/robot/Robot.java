@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Elevator;
 
 /**
@@ -25,6 +26,8 @@ import frc.robot.subsystems.Elevator;
  */
 public class Robot extends TimedRobot {
   public static DriveBase m_DriveBase = new DriveBase();
+  public static Intake m_intake=new Intake();
+  
   public static OI m_oi;
   public static Elevator m_elevator = new Elevator();
 
