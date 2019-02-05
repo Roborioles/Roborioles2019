@@ -7,9 +7,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -34,8 +34,8 @@ public class Elevator extends Subsystem {
   private double targetPos = 0;
   private boolean targetMode = false;
   private boolean manualMoving = false;
-  private final static int kPIDLoopIdx = 0;
-  private final static int kTimeoutMs = 10;
+  //private final static int kPIDLoopIdx = 0;
+  //private final static int kTimeoutMs = 10;
   
   public Elevator() {     
     /*elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);

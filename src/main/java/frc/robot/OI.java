@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Stretch;
 import frc.robot.commands.Launch;
-import frc.robot.commands.RaiseLower;;
+import frc.robot.commands.RaiseLower;
 import frc.robot.commands.Setpoint1;
 import frc.robot.commands.Setpoint2;
 import frc.robot.commands.Setpoint3;
@@ -54,9 +54,9 @@ public class OI {
  Button button8=new JoystickButton(stick, 8);
  Button button9=new JoystickButton(stick, 9);
  Button button1=new JoystickButton(stick,1);
- Button gamepadButton1 = new JoystickButton(gamepad, 1);
- Button gamepadButton2 = new JoystickButton(gamepad, 2);
- Button gamepadButton3 = new JoystickButton(gamepad, 3);
+ Button gamepadButton1 = new JoystickButton(gamePad, 1);
+ Button gamepadButton2 = new JoystickButton(gamePad, 2);
+ Button gamepadButton3 = new JoystickButton(gamePad, 3);
 
 public OI(){
   button8.whenPressed(new Stretch());
@@ -74,7 +74,7 @@ public OI(){
 
   public Joystick getGamepad()
   {
-    return gamepad;
+    return gamePad;
   }
 
 }
