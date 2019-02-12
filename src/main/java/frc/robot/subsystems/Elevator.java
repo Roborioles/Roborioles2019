@@ -29,11 +29,16 @@ public class Elevator extends Subsystem {
 
   //private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(5);
   private CANSparkMax elevatorMotor = new CANSparkMax(5, MotorType.kBrushless);
+  private CANSparkMax elevatorMotor2 = new CANSparkMax(6, MotorType.kBrushless);
   private CANEncoder elevatorEncoder = elevatorMotor.getEncoder();
   private CANPIDController elevatorPIDController = elevatorMotor.getPIDController();
   private double targetPos = 0;
   private boolean targetMode = false;
   private boolean manualMoving = false;
+  private int povValue = -1;
+  private boolean movingUp;
+  private boolean cargoToggle = false;
+  
   //private final static int kPIDLoopIdx = 0;
   //private final static int kTimeoutMs = 10;
   
@@ -57,8 +62,9 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setD(0);
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0);
-    elevatorPIDController.setOutputRange(-0.25,0.25);
+    elevatorPIDController.setOutputRange(-0.33,0.33);
     //elevatorMotor.setInverted(true);
+    elevatorMotor2.follow(elevatorMotor, true);
   }
   @Override
   public void initDefaultCommand() {
@@ -77,25 +83,66 @@ public class Elevator extends Subsystem {
       elevatorMotor.set(0);
     }
   }*/
-  public void goToRevolutions(double newTargetPos) {
-    targetPos = newTargetPos;
+  public void goToRevolutions(double newTargetPos, boolean withOffset) {
+    double offset = -11.1;
+    if (newTargetPos != targetPos) {
+      cargoToggle = false;
+    }
+    if (withOffset == true) {
+      if (cargoToggle == false) {
+        targetPos = newTargetPos;
+        cargoToggle = true;
+      }
+      else {
+        targetPos = newTargetPos + offset;
+        cargoToggle = false;
+      }
+    }
+    else {
+      targetPos = newTargetPos;
+      cargoToggle = false;
+    }
     targetMode = true;
   }
+  
+  public void goToInches(double inches, boolean withOffset) {
+    double heightRatio = 0.0; //revolutions per inch
+    goToRevolutions(inches * heightRatio, withOffset);
+  }
+
   public void elevatorExecute() {
-    System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()));
+    System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos));
     //double encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
     double encoderValue = elevatorEncoder.getPosition();
     // d-pad
-    int povValue = Robot.m_oi.getGamepad().getPOV();
-
+    if (Robot.m_oi.gamepadPresent() == true) {
+      povValue = Robot.m_oi.getGamepad().getPOV();
+    }
+    // move down
     if (povValue == 180) {
       targetMode = false;
       //elevatorMotor.set(ControlMode.PercentOutput, 0.5);
-      elevatorMotor.set(0.25);
+      movingUp = false;
+      if (encoderValue >= -1.5) {
+        elevatorMotor.set(0);
+      }
+      else {
+        elevatorMotor.set(0.25);
+      }
       manualMoving = true;
     }
+    // move up
     else if (povValue == 0) {
       targetMode = false;
+      if (encoderValue <= -45.0){
+        elevatorMotor.set(0);
+        // manualMoving = false;
+        // goToRevolutions(encoderValue, false);
+      }
+      else {
+        elevatorMotor.set(-0.25);
+      }
+      movingUp = true;
       /* if (encoderValue >= 0) {
         //elevatorMotor.set(ControlMode.PercentOutput, -0.5);
         elevatorMotor.set(-0.25);
@@ -104,22 +151,42 @@ public class Elevator extends Subsystem {
         //elevatorMotor.set(ControlMode.PercentOutput, 0);
         elevatorMotor.set(0.5);
       }*/
-      elevatorMotor.set(-0.25);
       manualMoving = true;
     }
     else if (povValue == -1) {
       if (!targetMode && manualMoving) {
         manualMoving = false;
         //encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
-        encoderValue = elevatorEncoder.getPosition();
-        goToRevolutions(encoderValue);
+        //encoderValue = elevatorEncoder.getPosition();
+        if (movingUp) {
+          // adjustments maded to compensate for effect of gravity after releasing button
+          if (encoderValue <= -45.0) {
+            goToRevolutions(encoderValue, false);
+          }
+          else {
+            goToRevolutions(encoderValue - 2.0, false);
+          }
+        }
+        else {
+          // adjustments maded to compensate for effect of gravity after releasing button
+          if (encoderValue >= -1.5 || encoderValue <= -45.0) {
+            goToRevolutions(encoderValue, false);
+          }
+          else {
+            goToRevolutions(encoderValue + 1.0, false);
+          }
+        }
+        
       }
+
+      
     }
     if (targetMode) {
       executeTarget();
       //encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
       encoderValue = elevatorEncoder.getPosition();
-      if (targetPos == 0 && encoderValue <- 0.1) {
+      if (targetPos == -0.001 && encoderValue > -0.01) {
+        System.out.println("Close enough");
         //elevatorMotor.set(ControlMode.PercentOutput, 0);
         elevatorMotor.set(0);
       }
@@ -132,7 +199,6 @@ public class Elevator extends Subsystem {
   public void elevatorInit() {
     //elevatorMotor.setSelectedSensorPosition(0);
     double encoderValue = elevatorEncoder.getPosition();
-    goToRevolutions(encoderValue);
-    System.out.println("Initializing!");
+    goToRevolutions(encoderValue, false);
   }
 }

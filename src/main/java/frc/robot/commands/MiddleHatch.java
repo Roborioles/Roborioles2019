@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Setpoint2 extends Command {
-  public Setpoint2() {
+public class MiddleHatch extends Command {
+  public MiddleHatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +24,7 @@ public class Setpoint2 extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevator.goToRevolutions(-15);
+    Robot.m_elevator.goToRevolutions(-24.16, true);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +32,7 @@ public class Setpoint2 extends Command {
   protected boolean isFinished() {
     return true;
   }
-
+  
   // Called once after isFinished returns true
   @Override
   protected void end() {

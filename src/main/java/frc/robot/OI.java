@@ -11,13 +11,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Stretch;
+import frc.robot.commands.TopHatch;
+import frc.robot.commands.ElevatorFloor;
 import frc.robot.commands.hatchHold;
 import frc.robot.commands.setHatchSol;
 import frc.robot.commands.Launch;
+import frc.robot.commands.LowerHatch;
+import frc.robot.commands.MiddleHatch;
 import frc.robot.commands.RaiseLower;
-import frc.robot.commands.Setpoint1;
-import frc.robot.commands.Setpoint2;
-import frc.robot.commands.Setpoint3;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -63,14 +64,16 @@ public class OI {
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
+ Button gamepadButton4 = new JoystickButton(gamePad, 4);
 
 public OI(){
   button8.whenPressed(new Stretch());
   button9.whenPressed(new RaiseLower());
   button1.whenPressed(new Launch());
-  gamepadButton1.whenPressed(new Setpoint1());
-  gamepadButton2.whenPressed(new Setpoint2());
-  gamepadButton3.whenPressed(new Setpoint3());
+  gamepadButton1.whenPressed(new LowerHatch());
+  gamepadButton3.whenPressed(new MiddleHatch());
+  gamepadButton4.whenPressed(new TopHatch());
+  gamepadButton2.whenPressed(new ElevatorFloor());
   button2.whenPressed(new hatchHold());
   button3.whenPressed(new setHatchSol());
   button4.whenPressed(new hatchHold());
@@ -81,8 +84,17 @@ public Joystick getStick()
   return stick;
 }
 
-public Joystick getGamepad(){
-  return gamePad;
-}
+  public Joystick getGamepad()
+  {
+    return gamePad;
+  }
 
+  public boolean gamepadPresent() {
+    if (!gamePad.getName().equals("")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
