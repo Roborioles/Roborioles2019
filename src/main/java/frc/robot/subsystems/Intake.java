@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,8 +23,9 @@ public class Intake extends Subsystem {
   private Solenoid pickyuppy= new Solenoid(0,2);
   private Solenoid innyouty= new Solenoid(0,1);
   private Solenoid Launcher = new Solenoid(0,3);
-
-
+  private Solenoid hatchAlign = new Solenoid(0,4);
+  private Servo Flippy= new Servo(1);
+ 
 
   @Override
   public void initDefaultCommand() {
@@ -45,6 +47,36 @@ public class Intake extends Subsystem {
   public void MoonLaunch(){
     Launcher.set(!Launcher.get());
 
+  }
+  public void Flip(){
+    System.out.println("Flip");
+
+    
+   /* if(Flippy.getPosition()==0.5){
+      System.out.println("0.0");
+      Flippy.set(0.0);
+    }else if(Flippy.getPosition()==0.0){
+      System.out.println("0.5");
+      Flippy.set(0.5);
+    }*/
+    if(Flippy.getAngle()==21){
+      System.out.println("on"+Flippy.getAngle());
+      Flippy.setAngle(102);
+    } else {
+      System.out.println("off"+Flippy.getAngle());
+      Flippy.setAngle(21);
+     }
+  }
+  public void HatchAlighnSet(){
+    hatchAlign.set(!hatchAlign.get());
+  }
+  public void FlipUp(){
+    System.out.println("up"+Flippy.getAngle());
+    Flippy.setAngle(Flippy.getAngle()+3);
+  }
+  public void FlipDown(){
+    System.out.println("down"+Flippy.getAngle());
+    Flippy.setAngle(Flippy.getAngle()-3);
   }
 
 }

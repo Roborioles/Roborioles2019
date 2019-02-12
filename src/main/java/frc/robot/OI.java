@@ -11,6 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Stretch;
+import frc.robot.commands.hatchHold;
+import frc.robot.commands.incrementHatchLower;
+import frc.robot.commands.incrementhatch;
+import frc.robot.commands.setHatchSol;
+import frc.robot.commands.Launch;
+import frc.robot.commands.RaiseLower;
+import frc.robot.commands.hatchHold;
 import frc.robot.commands.Launch;
 import frc.robot.commands.RaiseLower;
 import frc.robot.commands.Setpoint1;
@@ -49,14 +56,15 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
  Joystick stick = new Joystick(0);
  Joystick gamePad=new Joystick(1);
  Button button8=new JoystickButton(stick, 8);
  Button button9=new JoystickButton(stick, 9);
- Button button1=new JoystickButton(stick,1);
- Button gamepadButton1 = new JoystickButton(gamePad, 1);
- Button gamepadButton2 = new JoystickButton(gamePad, 2);
- Button gamepadButton3 = new JoystickButton(gamePad, 3);
+ Button button1=new JoystickButton(stick, 1);
+ Button button2=new JoystickButton(stick, 2);
+ Button button3=new JoystickButton(stick, 3);
+ Button button4=new JoystickButton(stick, 4);
 
 public OI(){
   button8.whenPressed(new Stretch());
@@ -65,16 +73,21 @@ public OI(){
   gamepadButton1.whenPressed(new Setpoint1());
   gamepadButton2.whenPressed(new Setpoint2());
   gamepadButton3.whenPressed(new Setpoint3());
+  Button gamepadButton1 = new JoystickButton(gamePad, 1);
+  Button gamepadButton2 = new JoystickButton(gamePad, 2);
+  Button gamepadButton3 = new JoystickButton(gamePad, 3);
+  button2.whenPressed(new hatchHold());
+  button3.whenPressed(new setHatchSol());
+  button4.whenPressed(new hatchHold());
 }
 
-  public Joystick getStick()
-  {
-    return stick;
-  }
+public Joystick getStick()
+{
+  return stick;
+}
 
-  public Joystick getGamepad()
-  {
-    return gamePad;
-  }
+public Joystick getGamepad(){
+  return gamePad;
+}
 
 }
