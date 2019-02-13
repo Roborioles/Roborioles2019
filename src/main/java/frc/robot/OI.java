@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Stretch;
 import frc.robot.commands.TopHatch;
 import frc.robot.commands.ElevatorFloor;
+import frc.robot.commands.HatchLetGo;
 import frc.robot.commands.hatchHold;
 import frc.robot.commands.setHatchSol;
 import frc.robot.commands.Launch;
@@ -55,28 +56,41 @@ public class OI {
 
  Joystick stick = new Joystick(0);
  Joystick gamePad=new Joystick(1);
- Button button8=new JoystickButton(stick, 8);
- Button button9=new JoystickButton(stick, 9);
- Button button1=new JoystickButton(stick, 1);
- Button button2=new JoystickButton(stick, 2);
- Button button3=new JoystickButton(stick, 3);
- Button button4=new JoystickButton(stick, 4);
+ // Button button1=new JoystickButton(stick, 1);
+ // Button button2=new JoystickButton(stick, 2);
+ // Button button3=new JoystickButton(stick, 3);
+ // Button button4=new JoystickButton(stick, 4);
+ // Button button8=new JoystickButton(stick, 8);
+ // Button button9=new JoystickButton(stick, 9);
+ 
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
  Button gamepadButton4 = new JoystickButton(gamePad, 4);
+ Button gamepadButton5 = new JoystickButton(gamePad, 5);
+ Button gamepadButton6 = new JoystickButton(gamePad, 6);
+ Button gamepadButton7 = new JoystickButton(gamePad, 7);
+ Button gamepadButton8 = new JoystickButton(gamePad, 8);
+ Button gamepadButton9 = new JoystickButton(gamePad, 9);
 
 public OI(){
-  button8.whenPressed(new Stretch());
-  button9.whenPressed(new RaiseLower());
-  button1.whenPressed(new Launch());
+  // button8.whenPressed(new Stretch());
+  // button9.whenPressed(new RaiseLower());
+  // button1.whenPressed(new Launch());
   gamepadButton1.whenPressed(new LowerHatch());
   gamepadButton3.whenPressed(new MiddleHatch());
   gamepadButton4.whenPressed(new TopHatch());
   gamepadButton2.whenPressed(new ElevatorFloor());
-  button2.whenPressed(new hatchHold());
-  button3.whenPressed(new setHatchSol());
-  button4.whenPressed(new hatchHold());
+  gamepadButton5.whenPressed(new HatchLetGo());
+  gamepadButton7.whenPressed(new hatchHold());
+  gamepadButton6.whenPressed(new setHatchSol());
+  gamepadButton8.whenPressed(new Launch());
+  gamepadButton8.whenReleased(new Launch());
+  gamepadButton9.whenPressed(new RaiseLower());
+  
+  // button2.whenPressed(new hatchHold());
+  // button3.whenPressed(new setHatchSol());
+  // button4.whenPressed(new hatchHold());
 }
 
 public Joystick getStick()

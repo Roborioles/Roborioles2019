@@ -25,7 +25,7 @@ public class LoadUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_intake.BallIntake(Robot.m_oi.getGamepad().getY());
+    Robot.m_intake.IntakeExecute();
   }
 
   // Make this return true when this Command no longer needs to run execute()

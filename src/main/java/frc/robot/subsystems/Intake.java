@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.commands.LoadUp;
 
 /**
@@ -32,6 +33,17 @@ public class Intake extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new LoadUp());
+  }
+  public void IntakeExecute() {
+    double leftJoystick = -1.0 * Robot.m_oi.getGamepad().getY();
+    intakeMotor.set(leftJoystick);
+    double rightJoystick = -1.0 * Robot.m_oi.getGamepad().getRawAxis(3);
+    if (rightJoystick >= 0.5) {
+      innyouty.set(true);
+    }
+    else if (rightJoystick <= -0.5) {
+      innyouty.set(false);
+    }
   }
   public void UpDown(){
     pickyuppy.set(!pickyuppy.get());
@@ -78,5 +90,12 @@ public class Intake extends Subsystem {
     System.out.println("down"+Flippy.getAngle());
     Flippy.setAngle(Flippy.getAngle()-3);
   }
-
+  public void FlipServoUp() {
+    // System.out.println("off"+Flippy.getAngle());
+      Flippy.setAngle(21);
+  }
+  public void FlipServoDown() {
+      // System.out.println("on"+Flippy.getAngle());
+      Flippy.setAngle(102);
+  }
 }
