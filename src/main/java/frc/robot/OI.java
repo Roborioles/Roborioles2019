@@ -74,6 +74,7 @@ public class OI {
  Button gamepadButton9 = new JoystickButton(gamePad, 9);
 
 public OI(){
+
   // button8.whenPressed(new Stretch());
   // button9.whenPressed(new RaiseLower());
   // button1.whenPressed(new Launch());
@@ -84,13 +85,14 @@ public OI(){
   gamepadButton5.whenPressed(new HatchLetGo());
   gamepadButton7.whenPressed(new hatchHold());
   gamepadButton6.whenPressed(new setHatchSol());
-  gamepadButton8.whenPressed(new Launch());
-  gamepadButton8.whenReleased(new Launch());
+  gamepadButton8.whenPressed(new Launch(true));
+  gamepadButton8.whenReleased(new Launch(false));
   gamepadButton9.whenPressed(new RaiseLower());
   
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());
+
 }
 
 public Joystick getStick()

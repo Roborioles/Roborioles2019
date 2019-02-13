@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Launch extends Command {
-  public Launch() {
+  private boolean launchout = false; 
+  private int delaycount=0;
+  public Launch(boolean launchout) {
+    this.launchout=launchout;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);
@@ -25,13 +28,34 @@ public class Launch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() { 
-    Robot.m_intake.MoonLaunch();
+    if(launchout){
+      if(Robot.m_intake.getdelayLaunch()){
+        if (delaycount<13) {
+          delaycount++;
+        }else{
+          Robot.m_intake.MoonLaunch(true);
+          Robot.m_intake.setdelayLaunch(false);
+        }
+      }else if(Robot.m_intake.isFlipdown()){
+       Robot.m_intake.FlipSeverUp();
+       Robot.m_intake.setdelayLaunch(true);
+       delaycount=0;
+      }
+      else{
+        Robot.m_intake.MoonLaunch(true);
+      }
+    }
+    else {
+      Robot.m_intake.MoonLaunch(false);
+      Robot.m_intake.setdelayLaunch(false);
+    }
+   
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return !Robot.m_intake.getdelayLaunch();
   }
 
   // Called once after isFinished returns true

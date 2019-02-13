@@ -21,12 +21,18 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private Spark intakeMotor=new Spark(0);
+  private boolean delayLaunch = false;
   private Solenoid pickyuppy= new Solenoid(0,2);
   private Solenoid innyouty= new Solenoid(0,1);
   private Solenoid Launcher = new Solenoid(0,3);
   private Solenoid hatchAlign = new Solenoid(0,4);
   private Servo Flippy= new Servo(1);
- 
+  public boolean getdelayLaunch(){
+    return delayLaunch;
+  }
+  public void setdelayLaunch(boolean dl){
+    delayLaunch=dl;
+  }
 
   @Override
   public void initDefaultCommand() {
@@ -56,14 +62,13 @@ public class Intake extends Subsystem {
   public void BallIntake(double speed){
     intakeMotor.set(speed);
   }
-  public void MoonLaunch(){
-    Launcher.set(!Launcher.get());
+  public void MoonLaunch(boolean launchout){
+    Launcher.set(launchout);
 
-  }
+  } 
   public void Flip(){
     System.out.println("Flip");
-
-    
+  
    /* if(Flippy.getPosition()==0.5){
       System.out.println("0.0");
       Flippy.set(0.0);
@@ -90,12 +95,18 @@ public class Intake extends Subsystem {
     System.out.println("down"+Flippy.getAngle());
     Flippy.setAngle(Flippy.getAngle()-3);
   }
-  public void FlipServoUp() {
-    // System.out.println("off"+Flippy.getAngle());
-      Flippy.setAngle(21);
+
+  public boolean isFlipdown(){
+    return Flippy.getAngle()==102;
+
   }
+  public void FlipSeverUp(){
+    Flippy.setAngle(21);
+  }
+
   public void FlipServoDown() {
       // System.out.println("on"+Flippy.getAngle());
       Flippy.setAngle(102);
   }
+
 }
