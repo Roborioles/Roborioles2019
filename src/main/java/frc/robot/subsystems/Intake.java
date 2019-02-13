@@ -100,7 +100,7 @@ public class Intake extends Subsystem {
     return Flippy.getAngle()==102;
 
   }
-  public void FlipSeverUp(){
+  public void FlipServoUp(){
     Flippy.setAngle(21);
   }
 

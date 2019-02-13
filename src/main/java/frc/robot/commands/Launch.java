@@ -37,7 +37,7 @@ public class Launch extends Command {
           Robot.m_intake.setdelayLaunch(false);
         }
       }else if(Robot.m_intake.isFlipdown()){
-       Robot.m_intake.FlipSeverUp();
+       Robot.m_intake.FlipServoUp();
        Robot.m_intake.setdelayLaunch(true);
        delaycount=0;
       }
