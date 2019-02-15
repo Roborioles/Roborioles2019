@@ -24,7 +24,7 @@ public class TopHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevator.goToRevolutions(-46.5, false);
+    Robot.m_elevator.goToRevolutions(-46.0, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

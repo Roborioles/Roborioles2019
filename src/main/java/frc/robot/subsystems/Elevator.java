@@ -17,6 +17,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.ElevatorMove;
 
@@ -57,12 +58,13 @@ public class Elevator extends Subsystem {
     elevatorMotor.config_kP(kPIDLoopIdx, 0.12, kTimeoutMs);
     elevatorMotor.config_kI(kPIDLoopIdx, 0, kTimeoutMs);
     elevatorMotor.config_kD(kPIDLoopIdx, 0, kTimeoutMs); */
-    elevatorPIDController.setP(0.12);
+    elevatorPIDController.setP(0.8);
     elevatorPIDController.setI(0);
-    elevatorPIDController.setD(0);
+    elevatorPIDController.setD(140);
     elevatorPIDController.setIZone(0);
-    elevatorPIDController.setFF(0);
-    elevatorPIDController.setOutputRange(-0.33,0.33);
+    elevatorPIDController.setFF(0); 
+    elevatorPIDController.setOutputRange(-0.75,0.60);
+    elevatorMotor.setRampRate(0.25);
     //elevatorMotor.setInverted(true);
     elevatorMotor2.follow(elevatorMotor, true);
   }
@@ -84,7 +86,7 @@ public class Elevator extends Subsystem {
     }
   }*/
   public void goToRevolutions(double newTargetPos, boolean withOffset) {
-    double offset = -11.1;
+    double offset = -13.4;
     if (newTargetPos != targetPos) {
       cargoToggle = false;
     }
@@ -111,6 +113,15 @@ public class Elevator extends Subsystem {
   }
 
   public void elevatorExecute() {
+    /* double pvalue = 0.80;
+    double dvalue = 140;
+    pvalue = Double.valueOf(SmartDashboard.getString("DB/String 0", "0.80"));
+    dvalue = Double.valueOf(SmartDashboard.getString("DB/String 1", "140"));
+    SmartDashboard.putString("DB/String 5", Double.toString(pvalue));
+    SmartDashboard.putString("DB/String 6", Double.toString(dvalue));
+    elevatorPIDController.setP(pvalue);
+    elevatorPIDController.setD(dvalue);
+    */
     System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos));
     //double encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
     double encoderValue = elevatorEncoder.getPosition();
@@ -189,6 +200,7 @@ public class Elevator extends Subsystem {
         System.out.println("Close enough");
         //elevatorMotor.set(ControlMode.PercentOutput, 0);
         elevatorMotor.set(0);
+        targetMode = false;
       }
     } 
   }
