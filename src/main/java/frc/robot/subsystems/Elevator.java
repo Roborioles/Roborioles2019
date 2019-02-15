@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.commands.ElevatorMove;
@@ -38,6 +39,9 @@ public class Elevator extends Subsystem {
   private int povValue = -1;
   private boolean movingUp;
   private boolean cargoToggle = false;
+  private PWMTalonSRX LightController = new PWMTalonSRX(2);
+
+  public boolean LowerHatchFinished;
   
   //private final static int kPIDLoopIdx = 0;
   //private final static int kTimeoutMs = 10;
@@ -200,5 +204,18 @@ public class Elevator extends Subsystem {
     //elevatorMotor.setSelectedSensorPosition(0);
     double encoderValue = elevatorEncoder.getPosition();
     goToRevolutions(encoderValue, false);
+
+  }
+  public void LEDControls(double targetpos){
+
+    if(manualMoving==true)
+      LightController.set(-0.87);
+    else if(LowerHatchFinished==true)
+    {
+      LightController.set(-0.85);
+    }
+    else
+        LightController.set(-0.95);
+
   }
 }
