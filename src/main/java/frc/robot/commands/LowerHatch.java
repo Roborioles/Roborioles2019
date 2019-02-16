@@ -25,13 +25,12 @@ public class LowerHatch extends Command {
   @Override
   protected void execute() {
     Robot.m_elevator.goToRevolutions(-2.36, true);
-    Robot.m_elevator.LEDControls(-.85);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    Robot.m_elevator.LowerHatchFinished=true;
     return true;
   }
 

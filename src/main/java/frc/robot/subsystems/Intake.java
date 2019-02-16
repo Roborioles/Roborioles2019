@@ -20,7 +20,7 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private Spark intakeMotor=new Spark(0);
-  private Solenoid pickyuppy= new Solenoid(0,2);
+  public Solenoid pickyuppy= new Solenoid(0,2);
   private Solenoid innyouty= new Solenoid(0,1);
   private Solenoid Launcher = new Solenoid(0,3);
   private Solenoid hatchAlign = new Solenoid(0,4);

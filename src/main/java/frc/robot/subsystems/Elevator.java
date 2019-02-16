@@ -42,6 +42,8 @@ public class Elevator extends Subsystem {
   private PWMTalonSRX LightController = new PWMTalonSRX(2);
 
   public boolean LowerHatchFinished;
+  public boolean MiddleHatchFinished;
+  public boolean TopHatchFinished;
   
   //private final static int kPIDLoopIdx = 0;
   //private final static int kTimeoutMs = 10;
@@ -115,6 +117,8 @@ public class Elevator extends Subsystem {
   }
 
   public void elevatorExecute() {
+    LEDControls();
+
     System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos));
     //double encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
     double encoderValue = elevatorEncoder.getPosition();
@@ -206,16 +210,35 @@ public class Elevator extends Subsystem {
     goToRevolutions(encoderValue, false);
 
   }
-  public void LEDControls(double targetpos){
+  public void LEDControls(){
+    double encoderValue=elevatorEncoder.getPosition(); // Gets reveloutions that are negative
+    if(Robot.m_intake.pickyuppy.get()==true){
+      LightController.set(.91);
+    }
 
-    if(manualMoving==true)
+    else if(manualMoving==true){
       LightController.set(-0.87);
-    else if(LowerHatchFinished==true)
+    }
+    else if(encoderValue>=-.03)
     {
-      LightController.set(-0.85);
+      LightController.set(.61); //Red
+      
+    }
+    else if(encoderValue>=-5.10 )
+    {
+      LightController.set(.77); //Green
+      
+    }
+    else if(encoderValue>=-27.4)
+    {
+      LightController.set(.87); //Blue
+    }
+    else if(encoderValue>=-47.0)
+    {
+      LightController.set(.93); //Blue
     }
     else
-        LightController.set(-0.95);
+        LightController.set(.69);
 
   }
 }
