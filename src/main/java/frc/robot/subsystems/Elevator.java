@@ -30,7 +30,7 @@ public class Elevator extends Subsystem {
 
   //private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(5);
   private CANSparkMax elevatorMotor = new CANSparkMax(5, MotorType.kBrushless);
-  private CANSparkMax elevatorMotor2 = new CANSparkMax(6, MotorType.kBrushless);
+  // private CANSparkMax elevatorMotor2 = new CANSparkMax(6, MotorType.kBrushless);
   private CANEncoder elevatorEncoder = elevatorMotor.getEncoder();
   private CANPIDController elevatorPIDController = elevatorMotor.getPIDController();
   private double targetPos = 0;
@@ -66,7 +66,7 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setOutputRange(-0.75,0.60);
     elevatorMotor.setRampRate(0.25);
     //elevatorMotor.setInverted(true);
-    elevatorMotor2.follow(elevatorMotor, true);
+    //elevatorMotor2.follow(elevatorMotor, true);
   }
   @Override
   public void initDefaultCommand() {

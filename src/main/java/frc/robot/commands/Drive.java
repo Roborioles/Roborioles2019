@@ -27,9 +27,10 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed = Robot.m_oi.getStick().getY()*-1.0;
+    double speed = Math.pow(Robot.m_oi.getStick().getY()*-1.0,3);
     double rotation = Robot.m_oi.getStick().getX();
     Robot.m_DriveBase.DriveWithJoySticks(speed, rotation);
+    Robot.m_DriveBase.AutoShift(2500, 700);
 
   }
 
