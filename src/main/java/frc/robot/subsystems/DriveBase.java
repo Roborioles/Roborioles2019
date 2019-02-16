@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,17 +23,24 @@ import frc.robot.commands.Drive;
 public class DriveBase extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private WPI_TalonSRX leftMotor1 = new WPI_TalonSRX(1);
-  private WPI_TalonSRX leftMotor2 = new WPI_TalonSRX(2);
-  private WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(3);
-  private WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(4);
+  // private WPI_TalonSRX leftMotor1 = new WPI_TalonSRX(1);
+  // private WPI_TalonSRX leftMotor2 = new WPI_TalonSRX(2);
+  //private WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(3);
+  // private WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(4);
+  private CANSparkMax leftMotor1 = new CANSparkMax(1,MotorType.kBrushless);
+  private CANSparkMax leftMotor2 = new CANSparkMax(2,MotorType.kBrushless);
+  private CANSparkMax rightMotor1 = new CANSparkMax(3,MotorType.kBrushless);
+  private CANSparkMax rightMotor2= new CANSparkMax(4,MotorType.kBrushless);
+
+
   private DifferentialDrive robotDrive = new DifferentialDrive(leftMotor1, rightMotor1);
 
 
   public DriveBase(){
-    leftMotor2.set(ControlMode.Follower, 1);
-    rightMotor2.set(ControlMode.Follower, 3);
-
+    //leftMotor2.set(ControlMode.Follower, 1);
+    //rightMotor2.set(ControlMode.Follower, 3);
+    leftMotor2.follow(leftMotor1);
+    rightMotor2.follow(rightMotor1);
 
   }
   @Override
