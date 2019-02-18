@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
   
   public static OI m_oi;
   public static Elevator m_elevator = new Elevator();
-  public static UsbCamera camera1;
+  public static UsbCamera camera1, camera2;
   public static VideoSink server;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -50,9 +50,13 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     Robot.m_elevator.elevatorInit();
+
     camera1 = CameraServer.getInstance().startAutomaticCapture(0);
+    camera2 = CameraServer.getInstance().startAutomaticCapture(1);
     server = CameraServer.getInstance().getServer();
+
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+    camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
   }
 
   /**
