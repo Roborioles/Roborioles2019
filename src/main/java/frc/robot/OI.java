@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.TopHatch;
+import frc.robot.commands.CameraSwitching;
 import frc.robot.commands.ElevatorFloor;
 import frc.robot.commands.HatchLetGo;
 import frc.robot.commands.hatchHold;
@@ -61,7 +62,7 @@ public class OI {
  // Button button4=new JoystickButton(stick, 4);
  // Button button8=new JoystickButton(stick, 8);
  // Button button9=new JoystickButton(stick, 9);
- 
+ private JoystickButton camera1Button = new JoystickButton(stick, 1);
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
@@ -77,6 +78,7 @@ public OI(){
   // button8.whenPressed(new Stretch());
   // button9.whenPressed(new RaiseLower());
   // button1.whenPressed(new Launch());
+  camera1Button.whenPressed(new CameraSwitching());
   gamepadButton1.whenPressed(new LowerHatch());
   gamepadButton3.whenPressed(new MiddleHatch());
   gamepadButton4.whenPressed(new TopHatch());
@@ -94,6 +96,7 @@ public OI(){
   // button4.whenPressed(new hatchHold());
 
 }
+
 
 public Joystick getStick()
 {
