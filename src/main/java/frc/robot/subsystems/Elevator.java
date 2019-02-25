@@ -18,7 +18,6 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -231,16 +230,16 @@ public class Elevator extends Subsystem {
   public void elevatorLEDs() {
     double encoderValue=elevatorEncoder.getPosition(); // Gets revolutions that are negative
     if (Robot.m_intake.pickyuppyUp == true) {
-      lightController.set(0.91);
+      lightController.set(0.91); // purple
     }
     else if (encoderValue >= -0.1) {
-      lightController.set(0.75);
+      lightController.set(0.75); // green
     }
     else if (cargoToggle == false) {
-      lightController.set(0.69);
+      lightController.set(0.67); // gold
     }
     else if (cargoToggle == true) {
-      lightController.set(0.91);
+      lightController.set(0.91); // purple
     }
   }
 }
