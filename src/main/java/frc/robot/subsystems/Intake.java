@@ -27,6 +27,7 @@ public class Intake extends Subsystem {
   private Solenoid Launcher = new Solenoid(0,3);
   private Solenoid hatchAlign = new Solenoid(0,4);
   private Servo Flippy= new Servo(1);
+  public boolean pickyuppyUp = false;
   public boolean getdelayLaunch(){
     return delayLaunch;
   }
@@ -41,6 +42,7 @@ public class Intake extends Subsystem {
     setDefaultCommand(new LoadUp());
   }
   public void IntakeExecute() {
+    pickyuppyUp = pickyuppy.get();
     double leftJoystick = -1.0 * Robot.m_oi.getGamepad().getY();
     intakeMotor.set(leftJoystick);
     double rightJoystick = -1.0 * Robot.m_oi.getGamepad().getRawAxis(3);

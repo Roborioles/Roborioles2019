@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -16,6 +17,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -33,6 +36,7 @@ public class Elevator extends Subsystem {
   // private CANSparkMax elevatorMotor2 = new CANSparkMax(6, MotorType.kBrushless);
   private CANEncoder elevatorEncoder = elevatorMotor.getEncoder();
   private CANPIDController elevatorPIDController = elevatorMotor.getPIDController();
+  private PWMTalonSRX lightController = new PWMTalonSRX(2);
   private double targetPos = 0;
   private boolean targetMode = false;
   private boolean manualMoving = false;
@@ -213,6 +217,7 @@ public class Elevator extends Subsystem {
     } 
     long endTime = System.currentTimeMillis();
     maxTime = Math.max(maxTime, endTime-startTime);
+    elevatorLEDs();
   }
   public void executeTarget() {
     //elevatorMotor.set(ControlMode.Position,targetPos * 4096.0);
@@ -222,5 +227,20 @@ public class Elevator extends Subsystem {
     //elevatorMotor.setSelectedSensorPosition(0);
     double encoderValue = elevatorEncoder.getPosition();
     goToRevolutions(encoderValue, false);
+  }
+  public void elevatorLEDs() {
+    double encoderValue=elevatorEncoder.getPosition(); // Gets revolutions that are negative
+    if (Robot.m_intake.pickyuppyUp == true) {
+      lightController.set(0.91);
+    }
+    else if (encoderValue >= -0.1) {
+      lightController.set(0.75);
+    }
+    else if (cargoToggle == false) {
+      lightController.set(0.69);
+    }
+    else if (cargoToggle == true) {
+      lightController.set(0.91);
+    }
   }
 }
