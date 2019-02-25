@@ -49,7 +49,7 @@ public class DriveBase extends Subsystem {
     setDefaultCommand(new Drive());
   }
   public void DriveWithJoySticks(double speed, double rotation){
-    robotDrive.arcadeDrive(speed, rotation);
+    robotDrive.arcadeDrive(speed*.2, rotation);
 
 
 
