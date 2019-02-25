@@ -76,4 +76,12 @@ public class DriveBase extends Subsystem {
     }
 
   }
+  public double Deadband(double joystickValue, double deadbandZone) {
+    if (joystickValue < deadbandZone && joystickValue > deadbandZone * -1 ) {
+      return 0.0;
+    }
+    else {
+      return (joystickValue - (Math.abs(joystickValue)/joystickValue * deadbandZone)/(1-deadbandZone));
+    }
+  }
 }

@@ -39,7 +39,8 @@ public class Elevator extends Subsystem {
   private int povValue = -1;
   private boolean movingUp;
   private boolean cargoToggle = false;
-  
+  private int cycles = 0;
+  private long maxTime = 0; 
   //private final static int kPIDLoopIdx = 0;
   //private final static int kTimeoutMs = 10;
   
@@ -113,6 +114,7 @@ public class Elevator extends Subsystem {
   }
 
   public void elevatorExecute() {
+    long startTime = System.currentTimeMillis();
     /* double pvalue = 0.80;
     double dvalue = 140;
     pvalue = Double.valueOf(SmartDashboard.getString("DB/String 0", "0.80"));
@@ -122,7 +124,13 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setP(pvalue);
     elevatorPIDController.setD(dvalue);
     */
-    System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos));
+    if (cycles == 50) {
+      cycles = 0;
+      System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos) + " Max Time: " + maxTime);
+    }
+    else {
+      cycles ++;
+    } 
     //double encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
     double encoderValue = elevatorEncoder.getPosition();
     // d-pad
@@ -197,12 +205,14 @@ public class Elevator extends Subsystem {
       //encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
       encoderValue = elevatorEncoder.getPosition();
       if (targetPos == -0.001 && encoderValue > -0.01) {
-        System.out.println("Close enough");
+        // System.out.println("Close enough");
         //elevatorMotor.set(ControlMode.PercentOutput, 0);
         elevatorMotor.set(0);
         targetMode = false;
       }
     } 
+    long endTime = System.currentTimeMillis();
+    maxTime = Math.max(maxTime, endTime-startTime);
   }
   public void executeTarget() {
     //elevatorMotor.set(ControlMode.Position,targetPos * 4096.0);

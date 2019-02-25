@@ -62,6 +62,7 @@ public class OI {
  // Button button8=new JoystickButton(stick, 8);
  // Button button9=new JoystickButton(stick, 9);
  
+ Button joystickButton11 = new JoystickButton(stick, 11);
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
@@ -87,12 +88,13 @@ public OI(){
 
   gamepadButton8.whenPressed(new Launch(true));
   gamepadButton8.whenReleased(new Launch(false));
+  joystickButton11.whenPressed(new Launch(true));
+  joystickButton11.whenReleased(new Launch(false));
   gamepadButton9.whenPressed(new RaiseLower());
   
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());
-
 }
 
 public Joystick getStick()
