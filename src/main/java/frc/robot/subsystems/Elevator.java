@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -18,6 +17,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -62,6 +62,7 @@ public class Elevator extends Subsystem {
     elevatorMotor.config_kP(kPIDLoopIdx, 0.12, kTimeoutMs);
     elevatorMotor.config_kI(kPIDLoopIdx, 0, kTimeoutMs);
     elevatorMotor.config_kD(kPIDLoopIdx, 0, kTimeoutMs); */
+    lightController.set(.87);
     elevatorPIDController.setP(0.8);
     elevatorPIDController.setI(0);
     elevatorPIDController.setD(140);
@@ -240,6 +241,9 @@ public class Elevator extends Subsystem {
     }
     else if (cargoToggle == true) {
       lightController.set(0.91); // purple
+    }
+    else {
+      lightController.set(.61);//red
     }
   }
 }

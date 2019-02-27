@@ -99,16 +99,16 @@ public class Intake extends Subsystem {
   }
 
   public boolean isFlipdown(){
-    return Flippy.getAngle()==102;
+    return Flippy.getAngle()==18;
 
   }
   public void FlipServoUp(){
-    Flippy.setAngle(21);
+    Flippy.setAngle(71);
   }
 
   public void FlipServoDown() {
       // System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(102);
+      Flippy.setAngle(18);
   }
 
 }
