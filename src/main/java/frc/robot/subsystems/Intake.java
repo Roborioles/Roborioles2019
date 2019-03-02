@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.LoadUp;
 
@@ -41,6 +42,11 @@ public class Intake extends Subsystem {
     setDefaultCommand(new LoadUp());
   }
   public void IntakeExecute() {
+
+    double dvalue = Double.valueOf(SmartDashboard.getString("DB/String 9", "21"));
+    SmartDashboard.putString("DB/String 4", Double.toString(Flippy.getAngle()));
+    Flippy.setAngle(dvalue);
+    // */
     double leftJoystick = -1.0 * Robot.m_oi.getGamepad().getY();
     intakeMotor.set(leftJoystick);
     double rightJoystick = -1.0 * Robot.m_oi.getGamepad().getRawAxis(3);
@@ -76,12 +82,12 @@ public class Intake extends Subsystem {
       System.out.println("0.5");
       Flippy.set(0.5);
     }*/
-    if(Flippy.getAngle()==21){
+    if(Flippy.getAngle()==120){
       System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(102);
+      Flippy.setAngle(80);
     } else {
       System.out.println("off"+Flippy.getAngle());
-      Flippy.setAngle(21);
+      Flippy.setAngle(120);
      }
   }
   public void HatchAlighnSet(){
@@ -97,16 +103,16 @@ public class Intake extends Subsystem {
   }
 
   public boolean isFlipdown(){
-    return Flippy.getAngle()==102;
+    return Flippy.getAngle()==80;
 
   }
   public void FlipServoUp(){
-    Flippy.setAngle(21);
+    Flippy.setAngle(120);
   }
 
   public void FlipServoDown() {
       // System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(102);
+      Flippy.setAngle(80);
   }
 
 }

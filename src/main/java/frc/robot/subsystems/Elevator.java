@@ -17,7 +17,6 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.ElevatorMove;
 
@@ -65,7 +64,7 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0); 
     elevatorPIDController.setOutputRange(-0.75,0.60);
-    elevatorMotor.setRampRate(0.25);
+    elevatorMotor.setClosedLoopRampRate(.25);
     //elevatorMotor.setInverted(true);
     //elevatorMotor2.follow(elevatorMotor, true);
   }
@@ -118,7 +117,7 @@ public class Elevator extends Subsystem {
     /* double pvalue = 0.80;
     double dvalue = 140;
     pvalue = Double.valueOf(SmartDashboard.getString("DB/String 0", "0.80"));
-    dvalue = Double.valueOf(SmartDashboard.getString("DB/String 1", "140"));
+     
     SmartDashboard.putString("DB/String 5", Double.toString(pvalue));
     SmartDashboard.putString("DB/String 6", Double.toString(dvalue));
     elevatorPIDController.setP(pvalue);
