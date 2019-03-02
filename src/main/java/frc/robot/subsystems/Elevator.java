@@ -16,10 +16,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.PWMTalonSRX;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.ElevatorMove;
 
@@ -35,7 +34,7 @@ public class Elevator extends Subsystem {
   // private CANSparkMax elevatorMotor2 = new CANSparkMax(6, MotorType.kBrushless);
   private CANEncoder elevatorEncoder = elevatorMotor.getEncoder();
   private CANPIDController elevatorPIDController = elevatorMotor.getPIDController();
-  private PWMTalonSRX lightController = new PWMTalonSRX(2);
+  private Spark lightController = new Spark(2);
   private double targetPos = 0;
   private boolean targetMode = false;
   private boolean manualMoving = false;
@@ -69,7 +68,7 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0); 
     elevatorPIDController.setOutputRange(-0.75,0.60);
-    elevatorMotor.setRampRate(0.25);
+    elevatorMotor.setClosedLoopRampRate(.25);
     //elevatorMotor.setInverted(true);
     //elevatorMotor2.follow(elevatorMotor, true);
   }
@@ -118,6 +117,8 @@ public class Elevator extends Subsystem {
   }
 
   public void elevatorExecute() {
+    
+
     long startTime = System.currentTimeMillis();
     /* double pvalue = 0.80;
     double dvalue = 140;
@@ -130,6 +131,7 @@ public class Elevator extends Subsystem {
     */
     if (cycles == 50) {
       cycles = 0;
+      System.out.println(lightController.get());
       System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos) + " Max Time: " + maxTime);
     }
     else {

@@ -55,7 +55,8 @@ public class Intake extends Subsystem {
   }
   public void UpDown(){
     pickyuppy.set(!pickyuppy.get());
-
+    System.out.println(pickyuppy.get());
+    
   }
   public void ExtendDistend(){
     innyouty.set(!innyouty.get());
