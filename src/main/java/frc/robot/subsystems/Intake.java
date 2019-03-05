@@ -43,9 +43,9 @@ public class Intake extends Subsystem {
   }
   public void IntakeExecute() {
 
-    double dvalue = Double.valueOf(SmartDashboard.getString("DB/String 9", "21"));
-    SmartDashboard.putString("DB/String 4", Double.toString(Flippy.getAngle()));
-    Flippy.setAngle(dvalue);
+    //double dvalue = Double.valueOf(SmartDashboard.getString("DB/String 9", "21"));
+    //SmartDashboard.putString("DB/String 4", Double.toString(Flippy.getAngle()));
+    //Flippy.setAngle(dvalue);
     // */
     double leftJoystick = -1.0 * Robot.m_oi.getGamepad().getY();
     intakeMotor.set(leftJoystick);
@@ -82,12 +82,12 @@ public class Intake extends Subsystem {
       System.out.println("0.5");
       Flippy.set(0.5);
     }*/
-    if(Flippy.getAngle()==120){
+    if(Flippy.getAngle()==70){
       System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(80);
+      Flippy.setAngle(25);
     } else {
       System.out.println("off"+Flippy.getAngle());
-      Flippy.setAngle(120);
+      Flippy.setAngle(70);
      }
   }
   public void HatchAlighnSet(){
@@ -103,16 +103,16 @@ public class Intake extends Subsystem {
   }
 
   public boolean isFlipdown(){
-    return Flippy.getAngle()==80;
+    return Flippy.getAngle()==25;
 
   }
   public void FlipServoUp(){
-    Flippy.setAngle(120);
+    Flippy.setAngle(70);
   }
 
   public void FlipServoDown() {
       // System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(80);
+      Flippy.setAngle(25);
   }
 
 }
