@@ -24,7 +24,9 @@ public class HatchLetGo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_intake.FlipServoUp();
+    Robot.m_intake.FlipServo(Robot.m_intake.Flippy,70);
+    Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft,25);
+    Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight,70);
   }
 
   // Make this return true when this Command no longer needs to run execute()

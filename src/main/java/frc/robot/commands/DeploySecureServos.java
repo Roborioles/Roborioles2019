@@ -10,8 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class hatchHold extends Command {
-  public hatchHold() {
+public class DeploySecureServos extends Command {
+
+  public DeploySecureServos() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +25,12 @@ public class hatchHold extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_intake.FlipServo(Robot.m_intake.Flippy, 25);
+      Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft,70);
+      Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight,25);
+    
+
+    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

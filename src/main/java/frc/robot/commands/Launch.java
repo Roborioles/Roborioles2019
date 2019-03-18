@@ -37,9 +37,18 @@ public class Launch extends Command {
           Robot.m_intake.setdelayLaunch(false);
         }
       }else if(Robot.m_intake.isFlipdown()){
-       Robot.m_intake.FlipServoUp();
+       Robot.m_intake.FlipServo(Robot.m_intake.Flippy,70);
+       Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft, 25);
+       Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight, 70);
        Robot.m_intake.setdelayLaunch(true);
        delaycount=0;
+      }
+      else if(Robot.m_intake.isSecureServoFlipdown()){
+        Robot.m_intake.FlipServo(Robot.m_intake.Flippy,70);
+        Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft, 25);
+        Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight, 70);
+        Robot.m_intake.setdelayLaunch(true);
+        delaycount=0;
       }
       else{
         Robot.m_intake.MoonLaunch(true);
