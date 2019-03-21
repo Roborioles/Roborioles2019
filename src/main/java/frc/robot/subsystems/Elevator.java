@@ -64,9 +64,9 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0); 
     elevatorPIDController.setOutputRange(-0.50,0.40);
-    elevatorMotor.setClosedLoopRampRate(.33);
+    elevatorMotor.setClosedLoopRampRate(.5);
     //elevatorMotor.setInverted(true);
-    elevatorMotor2.setClosedLoopRampRate(.33);
+    elevatorMotor2.setClosedLoopRampRate(.5);
     elevatorMotor2.follow(elevatorMotor, true);
   }
   @Override
@@ -127,7 +127,9 @@ public class Elevator extends Subsystem {
     if (cycles == 50) {
       cycles = 0;
       System.out.println("Position " + Double.toString(elevatorEncoder.getPosition()) + " Target: " + Double.toString(targetPos) + " Max Time: " + maxTime);
+      //System.out.println("Firmware"+elevatorMotor.getFirmwareString());
     }
+
     else {
       cycles ++;
     } 
@@ -222,5 +224,28 @@ public class Elevator extends Subsystem {
     //elevatorMotor.setSelectedSensorPosition(0);
     double encoderValue = elevatorEncoder.getPosition();
     goToRevolutions(encoderValue, false);
+    checkMotors();
+  }
+  public void checkMotors() {
+    if (elevatorMotor.getFirmwareString() == null) {
+      System.out.println("********ELEVATOR MOTOR 1 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 1 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 1 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 1 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 1 MISSING********");
+    }
+    else {
+      System.out.println("Elevator Motor 1 is OK");
+    }
+    if (elevatorMotor2.getFirmwareString() == null) {
+      System.out.println("********ELEVATOR MOTOR 2 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 2 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 2 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 2 MISSING********");
+      System.out.println("********ELEVATOR MOTOR 2 MISSING********");
+    }
+    else {
+      System.out.println("Elevator Motor 2 is OK");
+    }
   }
 }

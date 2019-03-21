@@ -84,4 +84,46 @@ public class DriveBase extends Subsystem {
       return (joystickValue - (Math.abs(joystickValue)/joystickValue * deadbandZone)/(1-deadbandZone));
     }
   }
+  public void checkMotors() {
+    if (leftMotor1.getFirmwareString() == null) {
+      System.out.println("********LEFT MOTOR 1 MISSING********");
+      System.out.println("********LEFT MOTOR 1 MISSING********");
+      System.out.println("********LEFT MOTOR 1 MISSING********");
+      System.out.println("********LEFT MOTOR 1 MISSING********");
+      System.out.println("********LEFT MOTOR 1 MISSING********");
+    }
+    else {
+      System.out.println("Left Motor 1 is OK");
+    }
+    if (leftMotor2.getFirmwareString() == null) {
+      System.out.println("********LEFT MOTOR 2 MISSING********");
+      System.out.println("********LEFT MOTOR 2 MISSING********");
+      System.out.println("********LEFT MOTOR 2 MISSING********");
+      System.out.println("********LEFT MOTOR 2 MISSING********");
+      System.out.println("********LEFT MOTOR 2 MISSING********");
+    }
+    else {
+      System.out.println("Left Motor 2 is OK");
+    }
+    if (rightMotor1.getFirmwareString() == null) {
+      System.out.println("********RIGHT MOTOR 1 MISSING********");
+      System.out.println("********RIGHT MOTOR 1 MISSING********");
+      System.out.println("********RIGHT MOTOR 1 MISSING********");
+      System.out.println("********RIGHT MOTOR 1 MISSING********");
+      System.out.println("********RIGHT MOTOR 1 MISSING********");
+    }
+    else {
+      System.out.println("Right Motor 1 is OK");
+    }
+    if (rightMotor2.getFirmwareString() == null) {
+      System.out.println("********RIGHT MOTOR 2 MISSING********");
+      System.out.println("********RIGHT MOTOR 2 MISSING********");
+      System.out.println("********RIGHT MOTOR 2 MISSING********");
+      System.out.println("********RIGHT MOTOR 2 MISSING********");
+      System.out.println("********RIGHT MOTOR 2 MISSING********");
+    }
+    else {
+      System.out.println("Right Motor 2 is OK");
+    }
+  }
 }

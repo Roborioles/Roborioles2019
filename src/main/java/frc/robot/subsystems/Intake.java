@@ -27,9 +27,15 @@ public class Intake extends Subsystem {
   private Solenoid innyouty= new Solenoid(0,1);
   private Solenoid Launcher = new Solenoid(0,3);
   private Solenoid hatchAlign = new Solenoid(0,4);
-  private Servo Flippy= new Servo(1);
+  private Solenoid WedgeShootOut =new Solenoid(0,5);
+  public Servo Flippy= new Servo(1);
+  public Servo SecureServoLeft = new Servo(3);
+  public Servo SecureServoRight = new Servo(2);
   public boolean getdelayLaunch(){
     return delayLaunch;
+  }
+  public boolean getWedgeSolenoid() {
+    return WedgeShootOut.get();
   }
   public void setdelayLaunch(boolean dl){
     delayLaunch=dl;
@@ -43,6 +49,7 @@ public class Intake extends Subsystem {
   }
   public void IntakeExecute() {
 
+   // System.out.println(Flippy.getAngle()+"\n"+SecureServoLeft.getAngle()+"\n"+SecureServoRight.getAngle()+"\n\n");
     //double dvalue = Double.valueOf(SmartDashboard.getString("DB/String 9", "21"));
     //SmartDashboard.putString("DB/String 4", Double.toString(Flippy.getAngle()));
     //Flippy.setAngle(dvalue);
@@ -106,13 +113,17 @@ public class Intake extends Subsystem {
     return Flippy.getAngle()==25;
 
   }
-  public void FlipServoUp(){
-    Flippy.setAngle(70);
+  public boolean isSecureServoFlipdown(){
+    return SecureServoLeft.getAngle()==90;
+  }
+  public void FlipServo(Servo ID, int angle){
+    ID.setAngle(angle);// original up angle 70 degrees
+                       // original down angle 25 degrees
   }
 
-  public void FlipServoDown() {
-      // System.out.println("on"+Flippy.getAngle());
-      Flippy.setAngle(25);
+  public void WedgeShoot() {
+    boolean shoot = WedgeShootOut.get();
+    WedgeShootOut.set(!shoot);
   }
 
 }

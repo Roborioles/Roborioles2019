@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.TopHatch;
+import frc.robot.commands.DeploySecureServos;
 import frc.robot.commands.ElevatorFloor;
 import frc.robot.commands.HatchLetGo;
 import frc.robot.commands.hatchHold;
 import frc.robot.commands.setHatchSol;
 import frc.robot.commands.Launch;
+import frc.robot.commands.LaunchWedge;
 import frc.robot.commands.LowerHatch;
 import frc.robot.commands.MiddleHatch;
 import frc.robot.commands.RaiseLower;
@@ -63,6 +65,7 @@ public class OI {
  // Button button9=new JoystickButton(stick, 9);
  
  Button joystickButton11 = new JoystickButton(stick, 11);
+ Button joystickButton10 = new JoystickButton(stick, 10);
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
@@ -72,7 +75,7 @@ public class OI {
  Button gamepadButton7 = new JoystickButton(gamePad, 7);
  Button gamepadButton8 = new JoystickButton(gamePad, 8);
  Button gamepadButton9 = new JoystickButton(gamePad, 9);
-
+ Button gamepadButton10= new JoystickButton(gamePad, 10);
 public OI(){
 
   // button8.whenPressed(new Stretch());
@@ -84,14 +87,15 @@ public OI(){
   gamepadButton2.whenPressed(new ElevatorFloor());
   gamepadButton5.whenPressed(new HatchLetGo());
   gamepadButton7.whenPressed(new hatchHold());
-  gamepadButton6.whenPressed(new setHatchSol());
+  gamepadButton10.whenPressed(new setHatchSol());
 
   gamepadButton8.whenPressed(new Launch(true));
   gamepadButton8.whenReleased(new Launch(false));
-  joystickButton11.whenPressed(new Launch(true));
-  joystickButton11.whenReleased(new Launch(false));
-  gamepadButton9.whenPressed(new RaiseLower());
-  
+  joystickButton10.whenPressed(new Launch(true));
+  joystickButton10.whenReleased(new Launch(false));
+  joystickButton11.whenPressed(new RaiseLower());
+  gamepadButton9.whenPressed(new LaunchWedge());
+  gamepadButton6.whenPressed(new DeploySecureServos());
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());
