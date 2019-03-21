@@ -86,8 +86,8 @@ public OI(){
   gamepadButton4.whenPressed(new TopHatch());
   gamepadButton2.whenPressed(new ElevatorFloor());
   gamepadButton5.whenPressed(new HatchLetGo());
-  gamepadButton10.whenPressed(new hatchHold());
-  gamepadButton6.whenPressed(new setHatchSol());
+  gamepadButton7.whenPressed(new hatchHold());
+  gamepadButton10.whenPressed(new setHatchSol());
 
   gamepadButton8.whenPressed(new Launch(true));
   gamepadButton8.whenReleased(new Launch(false));
@@ -95,7 +95,7 @@ public OI(){
   joystickButton10.whenReleased(new Launch(false));
   joystickButton11.whenPressed(new RaiseLower());
   gamepadButton9.whenPressed(new LaunchWedge());
-  gamepadButton7.whenPressed(new DeploySecureServos());
+  gamepadButton6.whenPressed(new DeploySecureServos());
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());

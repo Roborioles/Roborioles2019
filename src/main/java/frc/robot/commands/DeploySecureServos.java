@@ -25,8 +25,11 @@ public class DeploySecureServos extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft,70);
-      Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight,25);
+      if (!Robot.m_intake.getWedgeSolenoid()) {
+        Robot.m_intake.FlipServo(Robot.m_intake.SecureServoLeft,90);
+        Robot.m_intake.FlipServo(Robot.m_intake.SecureServoRight,5);
+      }
+     
     
 
     

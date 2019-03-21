@@ -29,10 +29,13 @@ public class Intake extends Subsystem {
   private Solenoid hatchAlign = new Solenoid(0,4);
   private Solenoid WedgeShootOut =new Solenoid(0,5);
   public Servo Flippy= new Servo(1);
-  public Servo SecureServoLeft = new Servo(2);
-  public Servo SecureServoRight = new Servo(3);
+  public Servo SecureServoLeft = new Servo(3);
+  public Servo SecureServoRight = new Servo(2);
   public boolean getdelayLaunch(){
     return delayLaunch;
+  }
+  public boolean getWedgeSolenoid() {
+    return WedgeShootOut.get();
   }
   public void setdelayLaunch(boolean dl){
     delayLaunch=dl;
@@ -46,6 +49,7 @@ public class Intake extends Subsystem {
   }
   public void IntakeExecute() {
 
+   // System.out.println(Flippy.getAngle()+"\n"+SecureServoLeft.getAngle()+"\n"+SecureServoRight.getAngle()+"\n\n");
     //double dvalue = Double.valueOf(SmartDashboard.getString("DB/String 9", "21"));
     //SmartDashboard.putString("DB/String 4", Double.toString(Flippy.getAngle()));
     //Flippy.setAngle(dvalue);
@@ -110,7 +114,7 @@ public class Intake extends Subsystem {
 
   }
   public boolean isSecureServoFlipdown(){
-    return SecureServoLeft.getAngle()==70;
+    return SecureServoLeft.getAngle()==90;
   }
   public void FlipServo(Servo ID, int angle){
     ID.setAngle(angle);// original up angle 70 degrees
