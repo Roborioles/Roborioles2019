@@ -66,6 +66,7 @@ public class OI {
  
  Button joystickButton11 = new JoystickButton(stick, 11);
  Button joystickButton10 = new JoystickButton(stick, 10);
+ Button joystickButton1 = new JoystickButton(stick, 1);
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
@@ -96,6 +97,7 @@ public OI(){
   joystickButton11.whenPressed(new RaiseLower());
   gamepadButton9.whenPressed(new LaunchWedge());
   gamepadButton6.whenPressed(new DeploySecureServos());
+  joystickButton1.whenPressed(new ZeroEncoder());
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());

@@ -8,10 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-public class LowerHatch extends Command {
-  public LowerHatch() {
+public class ZeroEncoder extends Command {
+  public ZeroEncoder() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +23,7 @@ public class LowerHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevator.goToRevolutions(-2.5, true);
+    Robot.m_elevator.resetEncoder();
   }
 
   // Make this return true when this Command no longer needs to run execute()

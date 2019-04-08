@@ -60,13 +60,13 @@ public class Elevator extends Subsystem {
     elevatorMotor.config_kD(kPIDLoopIdx, 0, kTimeoutMs); */
     elevatorPIDController.setP(0.8);
     elevatorPIDController.setI(0);
-    elevatorPIDController.setD(140);
+    elevatorPIDController.setD(220);
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0); 
     elevatorPIDController.setOutputRange(-0.50,0.40);
-    elevatorMotor.setClosedLoopRampRate(.5);
+    elevatorMotor.setClosedLoopRampRate(.75);
     //elevatorMotor.setInverted(true);
-    elevatorMotor2.setClosedLoopRampRate(.5);
+    elevatorMotor2.setClosedLoopRampRate(.75);
     elevatorMotor2.follow(elevatorMotor, true);
   }
   @Override
@@ -248,4 +248,9 @@ public class Elevator extends Subsystem {
       System.out.println("Elevator Motor 2 is OK");
     }
   }
+
+  public void resetEncoder() {
+    elevatorMotor.setPosition(0.0);
+  }
+  
 }
