@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ZeroEncoder extends Command {
-  public ZeroEncoder() {
+public class OverrideElevator extends Command {
+  public OverrideElevator() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +24,7 @@ public class ZeroEncoder extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevator.resetEncoder();
+    Robot.m_elevator.changeFloorPosition();
   }
 
   // Make this return true when this Command no longer needs to run execute()

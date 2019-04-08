@@ -20,7 +20,9 @@ import frc.robot.commands.Launch;
 import frc.robot.commands.LaunchWedge;
 import frc.robot.commands.LowerHatch;
 import frc.robot.commands.MiddleHatch;
+import frc.robot.commands.OverrideElevator;
 import frc.robot.commands.RaiseLower;
+import frc.robot.commands.ZeroEncoder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -66,7 +68,7 @@ public class OI {
  
  Button joystickButton11 = new JoystickButton(stick, 11);
  Button joystickButton10 = new JoystickButton(stick, 10);
- Button joystickButton1 = new JoystickButton(stick, 1);
+ Button joystickButton6 = new JoystickButton(stick, 6);
  Button gamepadButton1 = new JoystickButton(gamePad, 1);
  Button gamepadButton2 = new JoystickButton(gamePad, 2);
  Button gamepadButton3 = new JoystickButton(gamePad, 3);
@@ -97,7 +99,8 @@ public OI(){
   joystickButton11.whenPressed(new RaiseLower());
   gamepadButton9.whenPressed(new LaunchWedge());
   gamepadButton6.whenPressed(new DeploySecureServos());
-  joystickButton1.whenPressed(new ZeroEncoder());
+  joystickButton6.whenPressed(new OverrideElevator());
+  joystickButton6.whenReleased(new ZeroEncoder());
   // button2.whenPressed(new hatchHold());
   // button3.whenPressed(new setHatchSol());
   // button4.whenPressed(new hatchHold());

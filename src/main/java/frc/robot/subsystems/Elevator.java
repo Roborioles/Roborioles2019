@@ -39,7 +39,8 @@ public class Elevator extends Subsystem {
   private boolean movingUp;
   private boolean cargoToggle = false;
   private int cycles = 0;
-  private long maxTime = 0; 
+  private long maxTime = 0;
+  private boolean manualOverride = false; 
   //private final static int kPIDLoopIdx = 0;
   //private final static int kTimeoutMs = 10;
   
@@ -144,7 +145,7 @@ public class Elevator extends Subsystem {
       targetMode = false;
       //elevatorMotor.set(ControlMode.PercentOutput, 0.5);
       movingUp = false;
-      if (encoderValue >= -1.5) {
+      if (encoderValue >= -1.5 && !manualOverride) {
         elevatorMotor.set(0);
       }
       else {
@@ -155,7 +156,7 @@ public class Elevator extends Subsystem {
     // move up
     else if (povValue == 0) {
       targetMode = false;
-      if (encoderValue <= -45.0){
+      if (encoderValue <= -45.0 && !manualOverride){
         elevatorMotor.set(0);
         // manualMoving = false;
         // goToRevolutions(encoderValue, false);
@@ -250,7 +251,12 @@ public class Elevator extends Subsystem {
   }
 
   public void resetEncoder() {
-    elevatorMotor.setPosition(0.0);
+    elevatorEncoder.setPosition(0.0);
+    targetPos = -0.001;
+    manualOverride = false;
   }
   
+  public void changeFloorPosition() {
+    manualOverride = true;
+  }
 }
