@@ -17,6 +17,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.ElevatorMove;
 
@@ -64,7 +65,7 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setD(220);
     elevatorPIDController.setIZone(0);
     elevatorPIDController.setFF(0); 
-    elevatorPIDController.setOutputRange(-0.50,0.40);
+    elevatorPIDController.setOutputRange(-0.45,0.30);
     elevatorMotor.setClosedLoopRampRate(.75);
     //elevatorMotor.setInverted(true);
     elevatorMotor2.setClosedLoopRampRate(.75);
@@ -116,10 +117,10 @@ public class Elevator extends Subsystem {
 
   public void elevatorExecute() {
     long startTime = System.currentTimeMillis();
-    /* double pvalue = 0.80;
-    double dvalue = 140;
-    pvalue = Double.valueOf(SmartDashboard.getString("DB/String 0", "0.80"));
-     
+    /* double pvalue = 0.70;  // 0.80
+    double dvalue = 200;   // 220
+    pvalue = Double.valueOf(SmartDashboard.getString("DB/String 0", "0.70"));
+    dvalue = Double.valueOf(SmartDashboard.getString("DB/String 1", "200"));
     SmartDashboard.putString("DB/String 5", Double.toString(pvalue));
     SmartDashboard.putString("DB/String 6", Double.toString(dvalue));
     elevatorPIDController.setP(pvalue);
@@ -207,12 +208,12 @@ public class Elevator extends Subsystem {
       executeTarget();
       //encoderValue = elevatorMotor.getSelectedSensorPosition(0)/4096.0;
       encoderValue = elevatorEncoder.getPosition();
-      if (targetPos == -0.001 && encoderValue > -0.01) {
+      /*if (targetPos == -0.001 && encoderValue > -0.01) {
         // System.out.println("Close enough");
         //elevatorMotor.set(ControlMode.PercentOutput, 0);
         elevatorMotor.set(0);
         targetMode = false;
-      }
+      }*/
     } 
     long endTime = System.currentTimeMillis();
     maxTime = Math.max(maxTime, endTime-startTime);
